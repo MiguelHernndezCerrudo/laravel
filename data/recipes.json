@@ -1,0 +1,92 @@
+[
+    {
+      "id": "r1",
+      "title": "Eager Loading per evitar N+1",
+      "tags": ["eloquent", "performance"],
+      "problem": "Llistes d'elements que carreguen relacions fent moltes queries.",
+      "steps": [
+        "Detecta el N+1 (Laravel Debugbar / Telescope / logs).",
+        "Afegeix eager loading amb with().",
+        "Mesura diferència (temps i nº de queries)."
+      ],
+      "codeBlocks": [
+        {
+          "label": "Abans (N+1)",
+          "code": "$posts = Post::latest()->get();\nforeach ($posts as $post) {\n  echo $post->author->name;\n}"
+        },
+        {
+          "label": "Després (eager loading)",
+          "code": "$posts = Post::with('author')->latest()->get();\nforeach ($posts as $post) {\n  echo $post->author->name;\n}"
+        }
+      ]
+    },
+    {
+      "id": "r2",
+      "title": "Validació amb Form Request",
+      "tags": ["validation", "controllers"],
+      "problem": "Validació repetida i controladors massa grans.",
+      "steps": [
+        "Crea un Form Request.",
+        "Defineix rules() i authorize().",
+        "Injecta'l al controlador."
+      ],
+      "codeBlocks": [
+        {
+          "label": "Controlador",
+          "code": "public function store(StorePostRequest $request) {\n  Post::create($request->validated());\n  return redirect()->route('posts.index');\n}"
+        }
+      ]
+    },
+    {
+      "id": "r3",
+      "title": "Auth bàsic amb Breeze (conceptual)",
+      "tags": ["auth", "starter"],
+      "problem": "Necessites login/registre ràpid i net.",
+      "steps": [
+        "Instal·la un starter kit (Breeze).",
+        "Personalitza vistes i rutes.",
+        "Aplica middleware auth a àrees privades."
+      ],
+      "codeBlocks": [
+        {
+          "label": "Protegir una secció",
+          "code": "Route::middleware('auth')->group(function () {\n  Route::get('/app', fn () => view('app'));\n});"
+        }
+      ]
+    },
+    {
+      "id": "r4",
+      "title": "API Resource per responses consistents",
+      "tags": ["api", "eloquent"],
+      "problem": "Respostes API inconsistents (arrays diferents per endpoint).",
+      "steps": [
+        "Crea un Resource.",
+        "Mappa camps i relacions.",
+        "Retorna col·leccions paginades."
+      ],
+      "codeBlocks": [
+        {
+          "label": "Resource",
+          "code": "return [\n  'id' => $this->id,\n  'title' => $this->title,\n  'author' => [\n    'id' => $this->author->id,\n    'name' => $this->author->name,\n  ],\n];"
+        }
+      ]
+    },
+    {
+      "id": "r5",
+      "title": "Migrations amb foreign keys i cascada",
+      "tags": ["migrations", "database"],
+      "problem": "Integritat referencial trencada entre taules.",
+      "steps": [
+        "Defineix foreignId i constrained().",
+        "Decideix comportament onDelete (cascade/restrict).",
+        "Afegeix índexs si cal."
+      ],
+      "codeBlocks": [
+        {
+          "label": "Migration",
+          "code": "$table->foreignId('user_id')\n  ->constrained()\n  ->cascadeOnDelete();"
+        }
+      ]
+    }
+  ]
+  

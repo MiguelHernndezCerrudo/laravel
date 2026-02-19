@@ -1,0 +1,143 @@
+[
+    {
+      "slug": "routing",
+      "title": "Routing",
+      "summary": "Defineix rutes web i API amb control fi (verbs, params, middleware).",
+      "whyItMatters": "És el punt d'entrada de la teva aplicació: URL → lògica → resposta.",
+      "microExamples": [
+        {
+          "title": "Ruta bàsica",
+          "code": "Route::get('/hola', fn () => 'Hola Laravel');"
+        },
+        {
+          "title": "Ruta amb paràmetre i constraints",
+          "code": "Route::get('/users/{id}', [UserController::class, 'show'])\n  ->whereNumber('id');"
+        }
+      ],
+      "bestPractices": [
+        "Agrupa rutes per domini (prefix + middleware).",
+        "Usa rutes amb noms per desacoblar URLs del codi.",
+        "Separa rutes web i API (fitxers diferents)."
+      ]
+    },
+    {
+      "slug": "mvc",
+      "title": "MVC",
+      "summary": "Model-View-Controller per separar dades, presentació i control de flux.",
+      "whyItMatters": "Manté el codi escalable i fàcil de mantenir.",
+      "microExamples": [
+        {
+          "title": "Controlador retornant vista",
+          "code": "public function index() {\n  return view('posts.index', ['posts' => Post::latest()->get()]);\n}"
+        }
+      ],
+      "bestPractices": [
+        "Controladors prims, lògica al domini (Services/Actions).",
+        "Models per regles de negoci i relacions.",
+        "Views (Blade) per presentació, no lògica."
+      ]
+    },
+    {
+      "slug": "controllers",
+      "title": "Controllers",
+      "summary": "Gestionen la lògica de la petició i orquestren respostes.",
+      "whyItMatters": "Centralitza casos d'ús i facilita proves.",
+      "microExamples": [
+        {
+          "title": "Resource controller",
+          "code": "Route::resource('posts', PostController::class);"
+        }
+      ],
+      "bestPractices": [
+        "Usa Form Requests per validació.",
+        "Evita fer queries complexes dins el controlador.",
+        "Retorna Resources per API (no arrays ad-hoc)."
+      ]
+    },
+    {
+      "slug": "blade",
+      "title": "Blade",
+      "summary": "Motor de plantilles de Laravel (components, layouts, directives).",
+      "whyItMatters": "Permet UI clara i reutilitzable.",
+      "microExamples": [
+        {
+          "title": "Layout + seccions",
+          "code": "@extends('layouts.app')\n@section('content')\n  <h1>Posts</h1>\n@endsection"
+        }
+      ],
+      "bestPractices": [
+        "Reutilitza amb components Blade.",
+        "Evita queries a les vistes (fes-ho al controlador).",
+        "Mantén les vistes petites i composables."
+      ]
+    },
+    {
+      "slug": "eloquent",
+      "title": "Eloquent ORM",
+      "summary": "ORM per treballar amb BD amb models i relacions.",
+      "whyItMatters": "Accelera desenvolupament i fa el codi llegible.",
+      "microExamples": [
+        {
+          "title": "Relació + eager loading",
+          "code": "$posts = Post::with('author')->latest()->paginate();"
+        }
+      ],
+      "bestPractices": [
+        "Evita N+1 amb `with()`.",
+        "Defineix `fillable/guarded` correctament.",
+        "Usa scopes per queries repetides."
+      ]
+    },
+    {
+      "slug": "migrations",
+      "title": "Migrations",
+      "summary": "Versionat de l'esquema de BD (crear/alterar taules).",
+      "whyItMatters": "Desplegaments repetibles i equip alineat.",
+      "microExamples": [
+        {
+          "title": "Taula amb índex",
+          "code": "Schema::create('posts', function (Blueprint $table) {\n  $table->id();\n  $table->string('title');\n  $table->foreignId('user_id')->constrained()->cascadeOnDelete();\n  $table->timestamps();\n});"
+        }
+      ],
+      "bestPractices": [
+        "Afegeix índexs on cal (FK, camps de cerca).",
+        "Usa constraints i cascades de manera explícita.",
+        "Mantén migracions petites i enfocades."
+      ]
+    },
+    {
+      "slug": "middleware",
+      "title": "Middleware",
+      "summary": "Filtres que s'executen abans/després de la petició (auth, rate limit…).",
+      "whyItMatters": "Seguretat i coherència transversal.",
+      "microExamples": [
+        {
+          "title": "Protegir rutes",
+          "code": "Route::middleware(['auth'])->group(function () {\n  Route::get('/dashboard', fn () => view('dashboard'));\n});"
+        }
+      ],
+      "bestPractices": [
+        "Usa middleware per cross-cutting concerns, no per lògica de negoci.",
+        "Combina amb policies/permissions per autorització.",
+        "Aplica rate limiting a API."
+      ]
+    },
+    {
+      "slug": "validation",
+      "title": "Validation",
+      "summary": "Validació robusta de dades d'entrada (Form Requests, rules).",
+      "whyItMatters": "Evita dades corruptes i errors de seguretat.",
+      "microExamples": [
+        {
+          "title": "Form Request",
+          "code": "public function rules(): array {\n  return [\n    'email' => ['required','email'],\n    'password' => ['required','min:10']\n  ];\n}"
+        }
+      ],
+      "bestPractices": [
+        "Centralitza validació en Form Requests.",
+        "Missatges d'error clars i consistents.",
+        "Valida també a endpoints API."
+      ]
+    }
+  ]
+  
