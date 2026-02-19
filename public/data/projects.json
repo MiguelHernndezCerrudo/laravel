@@ -1,0 +1,59 @@
+[
+    {
+      "id": "p1",
+      "title": "CRM per equips comercials",
+      "goal": "Gestionar leads, oportunitats i seguiment de vendes amb permisos per rol.",
+      "laravelModules": ["Auth", "Policies", "Eloquent", "Migrations", "Queues", "Notifications"],
+      "stack": "Laravel + MySQL + Redis (queues) + Mail + Blade o Inertia",
+      "difficulty": "Mitjana",
+      "deliverables": [
+        "Gestió de leads i pipeline (kanban)",
+        "Assignació d'oportunitats",
+        "Notificacions per email",
+        "Export CSV i informes"
+      ]
+    },
+    {
+      "id": "p2",
+      "title": "E-commerce petit amb catàleg i comandes",
+      "goal": "Catàleg, cerca, carretó i gestió de comandes amb backoffice.",
+      "laravelModules": ["Routing", "Controllers", "Validation", "Eloquent", "Migrations", "Payments (integració)"],
+      "stack": "Laravel + MySQL + Stripe + Storage (S3 compatible)",
+      "difficulty": "Mitjana-alta",
+      "deliverables": [
+        "Productes, categories, stock",
+        "Carretó i checkout",
+        "Gestió de comandes i emails",
+        "Cupons i promocions"
+      ]
+    },
+    {
+      "id": "p3",
+      "title": "API per app mòbil (REST) amb tokens",
+      "goal": "Exposar dades via API segura, versionada i documentada.",
+      "laravelModules": ["API Resources", "Sanctum/Auth", "Middleware", "Rate Limiting", "Testing"],
+      "stack": "Laravel + PostgreSQL + OpenAPI/Swagger + CI",
+      "difficulty": "Alta",
+      "deliverables": [
+        "Auth amb tokens",
+        "Endpoints versionats",
+        "Rate limiting per client",
+        "Tests (feature + unit)"
+      ]
+    },
+    {
+      "id": "p4",
+      "title": "Intranet de documents amb permisos",
+      "goal": "Pujar, etiquetar i compartir documents amb control d'accés.",
+      "laravelModules": ["Storage", "Auth", "Policies", "Eloquent", "Validation", "Blade"],
+      "stack": "Laravel + MySQL + S3 + Antivirus hook (opcional)",
+      "difficulty": "Mitjana",
+      "deliverables": [
+        "Carpetes i etiquetes",
+        "Permisos per grups",
+        "Auditoria d'accessos",
+        "Cerca per metadades"
+      ]
+    }
+  ]
+  
